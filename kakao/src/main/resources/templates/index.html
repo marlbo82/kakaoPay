@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	  <title>Spring Boot - Angularjs Example</title>
+	  <meta charset="utf-8" />
+	  <meta name="viewport" content="width=device-width, initial-scale=1" />
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+	  <script src="/js/controller.js"></script>
+	  
+</head>
+<body>
+	<div ng-app="app" ng-controller="controller">
+		<table align="right">
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr align="center">
+					<td align="center" width="300"></td>
+					<td align="center" width="250">
+						<label for="input">할일</label>
+						<input type="text" id="workTitle" width="30">
+					</td>
+					<td align="center" width="250">
+						<label for="input">참조</label>
+						<input type="text" id="uprWorkId" width="30">
+					</td>
+					<td align="center" width="80">
+						<button id="createTodoWorkbtn" ng-click="createTodoWork()">등록</button>
+					</td>
+					<td align="center" width="380"></td>
+				</tr>
+			</tbody>
+		</table>
+		<br><br>
+		<table align="center" width="1200">
+			<thead>
+				<tr>
+					<th align="center">ID</th>
+					<th align="center">할일</th>
+					<th align="center">참조</th>
+					<th align="center">최초 등록 일시</th>
+					<th align="center">최종 수정 일시</th>
+					<th align="center">최종 완료 일시</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="record in records">
+					<td align="center" width="50">{{record.workId}}</td>
+					<td align="center" width="250">
+					    <div ng-if="checked == true">
+					    	<input type="text" id="workTitle_{{$index}}" value="{{record.workTitle}}">
+					    </div>
+					    <div ng-if="checked == false">
+					    	{{record.workTitle}}
+					    </div>
+				    </td>
+					<td align="center" width="50">
+					    <div ng-if="checked == true">
+					    	<input type="text" id="uprWorkId_{{$index}}" value="{{record.uprWorkId}}">
+					    </div>
+					    <div ng-if="checked == false">
+					    	{{record.uprWorkId}}
+					    </div>
+					</td>
+					<td align="center" width="250">{{record.firstRegDtm}}</td>
+					<td align="center" width="250">{{record.lastModDtm}}</td>
+					<td align="center" width="250">
+				        <button id="compelteTodoWorkbtn" ng-click="compelteTodoWork($index)" ng-show="isNull($index) == false">완료</button>
+					    <div ng-show="isNull($index) == true">
+					        {{record.completeDtm}}
+					    </div>
+					</td>
+					<td align="center" width="100">
+						<input type="checkbox" ng-model="checked" ng-init="checked=false" style="visibility: hidden">
+						<button id="updateTodoWorkbtn" ng-click="checked=true" ng-show="checked==false && isNull($index) == false">수정</button>
+						<button id="submitUpdateTodoWorkbtn" ng-click="updateTodoWork($index)" ng-show="checked == true">저장</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br><br>
+		<table align="center" width="1200">
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr align="center">
+					<td width="580">
+					</td>
+					<td width="8">
+			        	<!-- <button id="pagebtn" ng-click="getPrePage()">&lt;&lt;</button> -->
+					</td>
+					<td ng-repeat="page in totalPages" width="8">
+			        	<button id="pagebtn_{{$index}}" ng-click="getTodoList($index+1)">{{$index+1}}</button>
+					</td>
+					<td width="8">
+			        	<!-- <button id="pagebtn" ng-click="getPostPage()">&gt;&gt;</button> -->
+					</td>
+					<td width="580">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
