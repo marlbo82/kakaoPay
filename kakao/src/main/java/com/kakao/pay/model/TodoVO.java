@@ -8,6 +8,7 @@ public class TodoVO {
 	private String workId;
 	private String workTitle;
 	private String uprWorkId;
+	private String path;
 	private String firstRegDtm; 
 	private String lastModDtm; 
 	private String completeDtm;
@@ -32,6 +33,12 @@ public class TodoVO {
 	}
 	public void setUprWorkId(String uprWorkId) {
 		this.uprWorkId = uprWorkId;
+	}
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
 	}
 	public String getFirstRegDtm() {
 		return firstRegDtm;
@@ -61,8 +68,8 @@ public class TodoVO {
 	
 	@Override
 	public String toString() {
-		return "TodoVO [workId=" + workId + ", workTitle=" + workTitle + ", uprWorkId=" + uprWorkId + ", firstRegDtm="
-				+ firstRegDtm + ", lastModDtm=" + lastModDtm + ", completeDtm=" + completeDtm
+		return "TodoVO [workId=" + workId + ", workTitle=" + workTitle + ", uprWorkId=" + uprWorkId + ", path=" + path
+				+ ", firstRegDtm=" + firstRegDtm + ", lastModDtm=" + lastModDtm + ", completeDtm=" + completeDtm
 				+ ", totalPage=" + totalPage + "]";
 	}
 }

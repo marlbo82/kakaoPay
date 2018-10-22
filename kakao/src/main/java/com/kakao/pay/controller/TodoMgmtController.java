@@ -23,6 +23,7 @@ public class TodoMgmtController {
 	@Autowired
 	private TodoMgmtService todoMgmtService;
 	
+	
 	@RequestMapping(value = "/works", method = RequestMethod.GET)
 	public @ResponseBody Map<String, List<TodoVO>> getTodoList(@RequestParam(value="workId", required = false) String workId,
 															   @RequestParam(value="page", required = false, defaultValue = "0") String page) {
@@ -34,13 +35,12 @@ public class TodoMgmtController {
 		return result;
 	}
 	
+	
 	@RequestMapping(value = "/works", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> createTodoWork(@RequestBody TodoVO todoVO) {
-		int resultCode = 500;
-		String resultMsg = "Internal Server Error";
-		
 		Map<String, Object> result = new HashMap<String, Object>();
 		
+		// 입력 parameter validation check
 		if(StringUtils.isEmpty(todoVO.getWorkTitle())) {
 			result.put("resultCode", 400);
 			result.put("resultMsg", "Bad Request - \"할 일\"이 입력되지 않았습니다.");
@@ -48,19 +48,22 @@ public class TodoMgmtController {
 			result = todoMgmtService.createTodoWork(todoVO);
 		}
 		
-		
 		return result;
 	}
+	
 	
 	@RequestMapping(value = "/works", method = RequestMethod.PUT)
 	public @ResponseBody Map<String, Object> updateTodoWork(@RequestBody TodoVO todoVO) {
 		Map<String, Object> resultMap = todoMgmtService.updateTodoWork(todoVO);
+		
 		return resultMap;
 	}
+	
 	
 	@RequestMapping(value = "/works", method = RequestMethod.PUT, params="isCompletion=true")
 	public @ResponseBody Map<String, Object> compelteTodoWork(@RequestBody TodoVO todoVO) {
 		Map<String, Object> resultMap = todoMgmtService.compelteTodoWork(todoVO);
+		
 		return resultMap;
 	}
 }

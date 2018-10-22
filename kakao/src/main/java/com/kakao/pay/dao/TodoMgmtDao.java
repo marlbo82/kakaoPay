@@ -16,16 +16,16 @@ public class TodoMgmtDao {
     private RedisTemplate redisTemplate;
  
 	public Set<String> getAllKeys() {
-		
 		return redisTemplate.keys("*");
 	}	
 	
-	public TodoVO getTodoList(String workId) {
+	public TodoVO getTodoWork(String workId) {
 		Map<String, String> value = (Map<String, String>) redisTemplate.opsForValue().get(workId);
     	TodoVO todoVO = new TodoVO();
     	todoVO.setWorkId(value.get("workId"));
 		todoVO.setWorkTitle(value.get("workTitle"));
 		todoVO.setUprWorkId(value.get("uprWorkId"));
+		todoVO.setPath(value.get("path"));
 		todoVO.setFirstRegDtm(value.get("firstRegDtm"));
 		todoVO.setLastModDtm(value.get("lastModDtm"));
 		todoVO.setCompleteDtm(value.get("completeDtm"));

@@ -71,17 +71,20 @@
 					    	{{record.uprWorkId}}
 					    </div>
 					</td>
+					<td align="center" style="display:none;">
+					{{record.path}}
+					</td>
 					<td align="center" width="250">{{record.firstRegDtm}}</td>
 					<td align="center" width="250">{{record.lastModDtm}}</td>
 					<td align="center" width="250">
-				        <button id="compelteTodoWorkbtn" ng-click="compelteTodoWork($index)" ng-show="isNull($index) == false">완료</button>
-					    <div ng-show="isNull($index) == true">
+				        <button id="compelteTodoWorkbtn" ng-click="compelteTodoWork($index)" ng-show="isCompleteDtmNull($index) == false">완료</button>
+					    <div ng-show="isCompleteDtmNull($index) == true">
 					        {{record.completeDtm}}
 					    </div>
 					</td>
 					<td align="center" width="100">
 						<input type="checkbox" ng-model="checked" ng-init="checked=false" style="visibility: hidden">
-						<button id="updateTodoWorkbtn" ng-click="checked=true" ng-show="checked==false && isNull($index) == false">수정</button>
+						<button id="updateTodoWorkbtn" ng-click="checked=true" ng-show="checked==false && isCompleteDtmNull($index) == false">수정</button>
 						<button id="submitUpdateTodoWorkbtn" ng-click="updateTodoWork($index)" ng-show="checked == true">저장</button>
 					</td>
 				</tr>
@@ -103,13 +106,13 @@
 					<td width="580">
 					</td>
 					<td width="8">
-			        	<!-- <button id="pagebtn" ng-click="getPrePage()">&lt;&lt;</button> -->
+			        	<button id="pagebtn" ng-click="getPrePage()">&lt;&lt;</button>
 					</td>
-					<td ng-repeat="page in totalPages" width="8">
-			        	<button id="pagebtn_{{$index}}" ng-click="getTodoList($index+1)">{{$index+1}}</button>
+					<td ng-repeat="page in ranges" width="8">
+			        	<button id="pagebtn_{{page}}" ng-click="getTodoList(page)">{{page}}</button>
 					</td>
 					<td width="8">
-			        	<!-- <button id="pagebtn" ng-click="getPostPage()">&gt;&gt;</button> -->
+			        	<button id="pagebtn" ng-click="getPostPage()">&gt;&gt;</button>
 					</td>
 					<td width="580">
 					</td>
